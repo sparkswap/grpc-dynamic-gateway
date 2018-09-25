@@ -40,7 +40,10 @@ const middleware = (protoFiles, grpcLocation, credentials = requiredGrpc.credent
     .map(p => schema.parse(fs.readFileSync(p)))
     .forEach((sch, si) => {
       const pkg = sch.package
+      console.error('sch', sch)
       if (!sch.services) { return }
+      console.error('sch.services', sch.services)
+
       sch.services.forEach(s => {
         const svc = s.name
         getPkg(clients, pkg, true)[svc] = new (getPkg(protos[si], pkg, false))[svc](grpcLocation, credentials)
