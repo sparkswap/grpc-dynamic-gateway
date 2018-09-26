@@ -45,6 +45,14 @@ const middleware = (protoFiles, grpcLocation, credentials = requiredGrpc.credent
       sch.services.forEach(s => {
         const svc = s.name
         console.error('creds', credentials)
+        console.error('clients', clients)
+        console.error('pkg', pkg)
+        console.error('si', si)
+        console.error('protos', protos)
+        console.error('protos[si]', protos[si])
+        console.error('getPkg(protos[si], pkg, false)', getPkg(protos[si], pkg, false))
+        console.error('(getPkg(protos[si], pkg, false))[svc]',(getPkg(protos[si], pkg, false))[svc])
+
         getPkg(clients, pkg, true)[svc] = new (getPkg(protos[si], pkg, false))[svc](grpcLocation, credentials)
         s.methods.forEach(m => {
           if (m.options['google.api.http']) {
