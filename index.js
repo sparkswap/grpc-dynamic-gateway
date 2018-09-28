@@ -113,8 +113,11 @@ const getPkg = (client, pkg, create = false) => {
  */
 const convertParams = (req, url) => {
   const gparams = getParamsList(url)
+  console.log('gparams', gparams)
   const out = req.body
   gparams.forEach(p => {
+    console.log('p', p)
+    console.log('req.query', req.query)
     if (req.query && req.query[p]) {
       out[p] = req.query[p]
     }
