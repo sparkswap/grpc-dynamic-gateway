@@ -102,7 +102,6 @@ const getPkg = (client, pkg, create = false) => {
     }
     obj = obj[name]
   })
-  console.log(obj)
   return obj
 }
 
@@ -115,14 +114,12 @@ const getPkg = (client, pkg, create = false) => {
 const convertParams = (req, url) => {
   const gparams = getParamsList(url)
   const out = req.body
-  console.log('query', req.query)
+
   if (req.query) {
     Object.keys(req.query).forEach((queryParam) => {
-      console.log('queryParam', queryParam)
       out[queryParam] = req.query[queryParam]
     })
   }
-  console.log(out)
   gparams.forEach(p => {
     if (req.params && req.params[p]) {
       out[p] = req.params[p]
