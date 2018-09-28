@@ -112,6 +112,9 @@ const getPkg = (client, pkg, create = false) => {
  * @return {Object}      params for gRPC client
  */
 const convertParams = (req, url) => {
+  console.log('uRLLLLLL', url)
+  console.log('req', req)
+
   const gparams = getParamsList(url)
   console.log('gparams', gparams)
   const out = req.body
