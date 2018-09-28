@@ -117,7 +117,7 @@ const convertParams = (req, url) => {
   const out = req.body
   console.log('query', req.query)
   if (req.query) {
-    req.query.forEach((queryParam) => {
+    req.query.keys.forEach((queryParam) => {
       console.log('queryParam', queryParam)
       out[queryParam] = req.query[queryParam]
     })
