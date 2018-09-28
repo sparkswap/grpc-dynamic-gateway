@@ -60,6 +60,7 @@ const middleware = (protoFiles, grpcLocation, credentials = requiredGrpc.credent
                   }
 
                   try {
+                    console.log('parammsssssssss', params)
                     getPkg(clients, pkg, false)[svc][lowerFirstChar(m.name)](params, meta, (err, ans) => {
                       // TODO: PRIORITY:MEDIUM - improve error-handling
                       // TODO: PRIORITY:HIGH - double-check JSON mapping is identical to grpc-gateway
@@ -112,18 +113,17 @@ const getPkg = (client, pkg, create = false) => {
  * @return {Object}      params for gRPC client
  */
 const convertParams = (req, url) => {
-  console.log('uRLLLLLL', url)
-  console.log('req', req)
-
   const gparams = getParamsList(url)
-  console.log('gparams', gparams)
   const out = req.body
+  console.log('query', req.query)
+  if (req.query) {
+    req.query.forEach((queryParam) => {
+      console.log('queryParam', queryParam)
+      out[queryParam] = req.query[queryParam]
+    })
+  }
+  console.log(out)
   gparams.forEach(p => {
-    console.log('p', p)
-    console.log('req.query', req.query)
-    if (req.query && req.query[p]) {
-      out[p] = req.query[p]
-    }
     if (req.params && req.params[p]) {
       out[p] = req.params[p]
     }
